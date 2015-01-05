@@ -413,46 +413,37 @@
 				return item.length ? item : null;
 			}
 
+			function findSibling(item, direction) {
+				if (item !== null) {
+					while (
+						item[0].nodeName.toLowerCase() !== "li" ||
+						item.hasClass(o.disabledClass) ||
+						item[0] === this.currentItem[0] ||
+						item[0] === this.helper[0]
+					) {
+						var ensuing = item[direction]();
+						if (ensuing) {
+							item = ensuing;
+						} else {
+							return null;
+						}
+					}
+
+					return item;
+				}
+			}
+
 			previousItem = itemOrNull(this.placeholder.prev());
 
 			// mjs - to find the previous sibling in the list,
 			// keep backtracking until we hit a valid list item.
-
-			if (previousItem != null) {
-				while (
-					previousItem[0].nodeName.toLowerCase() !== "li" ||
-					previousItem.hasClass(o.disabledClass) ||
-					previousItem[0] === this.currentItem[0] ||
-					previousItem[0] === this.helper[0]
-				) {
-					if (previousItem[0].previousSibling) {
-						previousItem = $(previousItem[0].previousSibling);
-					} else {
-						previousItem = null;
-						break;
-					}
-				}
-			}
+			previousItem = findSibling(previousItem, "prev");
 
 			// mjs - to find the next sibling in the list,
 			// keep stepping forward until we hit a valid list item.
 			nextItem = itemOrNull(this.placeholder.next());
 
-			if (nextItem != null) {
-				while (
-					nextItem[0].nodeName.toLowerCase() !== "li" ||
-					nextItem.hasClass(o.disabledClass) ||
-					nextItem[0] === this.currentItem[0] ||
-					nextItem[0] === this.helper[0]
-				) {
-					if (nextItem[0].nextSibling) {
-						nextItem = $(nextItem[0].nextSibling);
-					} else {
-						nextItem = null;
-						break;
-					}
-				}
-			}
+			nextItem = findSibling(nextItem, "next");
 
 			this.beyondMaxLevels = 0;
 
