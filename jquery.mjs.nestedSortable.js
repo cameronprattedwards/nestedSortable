@@ -288,7 +288,7 @@
 
 				// No action if intersected item is disabled
 				// and the element above or below in the direction we're going is also disabled
-				if (itemElement.hasClass(o.disabledClass)) {
+				if (item.item.hasClass(o.disabledClass)) {
 					// Note: intersection hardcoded direction values from
 					// jquery.ui.sortable.js:_intersectsWithPointer
 					if (intersection === 2) {
