@@ -409,16 +409,14 @@
 				}
 			}
 
+			function itemOrNull(item) {
+				return item.length ? item : null;
+			}
+
+			previousItem = itemOrNull(this.placeholder.prev());
+
 			// mjs - to find the previous sibling in the list,
 			// keep backtracking until we hit a valid list item.
-			(function() {
-				var _previousItem = this.placeholder.prev();
-				if (_previousItem.length) {
-					previousItem = _previousItem;
-				} else {
-					previousItem = null;
-				}
-			}());
 
 			if (previousItem != null) {
 				while (
@@ -438,14 +436,7 @@
 
 			// mjs - to find the next sibling in the list,
 			// keep stepping forward until we hit a valid list item.
-			(function() {
-				var _nextItem = this.placeholder.next();
-				if (_nextItem.length) {
-					nextItem = _nextItem;
-				} else {
-					nextItem = null;
-				}
-			}());
+			nextItem = itemOrNull(this.placeholder.next());
 
 			if (nextItem != null) {
 				while (
