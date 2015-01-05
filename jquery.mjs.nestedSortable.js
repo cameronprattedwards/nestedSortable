@@ -279,7 +279,7 @@
 
 				// No action if intersected item is disabled
 				// and the element above or below in the direction we're going is also disabled
-				if (itemElement.className.indexOf(o.disabledClass) !== -1) {
+				if (itemElement.hasClass(o.disabledClass)) {
 					// Note: intersection hardcoded direction values from
 					// jquery.ui.sortable.js:_intersectsWithPointer
 					if (intersection === 2) {
@@ -412,7 +412,7 @@
 			if (previousItem != null) {
 				while (
 					previousItem[0].nodeName.toLowerCase() != "li" ||
-					previousItem[0].className.indexOf(o.disabledClass) !== -1 ||
+					previousItem.hasClass(o.disabledClass) ||
 					previousItem[0] == this.currentItem[0] ||
 					previousItem[0] == this.helper[0]
 				) {
@@ -439,7 +439,7 @@
 			if (nextItem != null) {
 				while (
 					nextItem[0].nodeName.toLowerCase() != "li" ||
-					nextItem[0].className.indexOf(o.disabledClass) !== -1 ||
+					nextItem.hasClass(o.disabledClass) ||
 					nextItem[0] == this.currentItem[0] ||
 					nextItem[0] == this.helper[0]
 				) {
